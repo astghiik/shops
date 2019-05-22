@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <title>shops</title>
+</head>
+<body>
+  <!--shops-->
+  <div id="shops" class="shadow w-75 p-3 m-5 bg-white rounded">
+    <h1 class="text-center text-secondary mb-5">SHOPS</h1>
+    <ul class="list-group list-group-flush" id="shopList">
+      <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" onclick="showProducts(event)">
+        shop 1
+        <div>
+          <button type="button" class="btn btn-outline-primary rounded-pill" data-toggle="modal" data-target="#editModal" onclick="editShop(event)">Edit</button>
+          <button type="button" class="btn btn-outline-danger rounded-pill" onclick="deleteShop(event)">Delete</button>
+        </div>
+      </li>
+      <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" onclick="showProducts(event)">
+        shop 2
+        <div>
+          <button type="button" class="btn btn-outline-primary rounded-pill" data-toggle="modal" data-target="#editModal" onclick="editShop(event)">Edit</button>
+          <button type="button" class="btn btn-outline-danger rounded-pill" onclick="deleteShop(event)">Delete</button>
+        </div>
+      </li>
+    </ul>
+    <button type="button" class="btn btn-outline-dark btn-lg rounded-pill mt-4" data-toggle="modal" data-target="#addModal">Add Shop</button>
+  </div>
+  <!--edit shop modal-->
+  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel">Edit Shop</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="shop-name" class="col-form-label">name:</label>
+              <input type="text" class="form-control" id="shop-name">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="saveName()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--add shop-->
+  <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addModalLabel">Add New Shop</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="new-shop-name" class="col-form-label">name:</label>
+              <input type="text" class="form-control" id="new-shop-name">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addShop()">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--products-->
+  <div class="w-75 p-3 shadow m-5 bg-white rounded" id="products" style="display: none">
+    <table class="table" id="products-table">
+      <thead>
+        <tr>
+          <th scope="col" class="border-0">Name</th>
+          <th scope="col" class="border border-top-0 border-bottom-0 text-center">QTY</th>
+          <th scope="col" class="border-0 text-center">Price</th>
+        </tr>
+      </thead>
+      <tbody id="shop1" style="display: none">
+        <tr>
+          <td>a1</td>
+          <td class="border-left border-right text-center">2</td>
+          <td class="text-center">$4</td>
+        </tr>
+        <tr>
+          <td>a2</td>
+          <td class="border-left border-right text-center">1</td>
+          <td class="text-center">$8</td>
+        </tr>
+        <tr>
+          <td>a3</td>
+          <td class="border-left border-right text-center">3</td>
+          <td class="text-center">$3</td>
+        </tr>
+      </tbody>
+      <tbody id="shop2" style="display: none">
+        <tr>
+          <td>b1</td>
+          <td class="border-left border-right text-center">5</td>
+          <td class="text-center">$2</td>
+        </tr>
+        <tr>
+          <td>b2</td>
+          <td class="border-left border-right text-center">3</td>
+          <td class="text-center">$4</td>
+        </tr>
+      </tbody>
+      <tfoot class="border-bottom" id="total-price-row">
+        <td></td>
+        <td class="border-left border-right"></td>
+        <td class="text-center font-weight-bold"></td>
+      </tfoot>
+    </table>
+    <button type="button" class="btn btn-outline-dark btn-lg rounded-pill mt-4" data-toggle="modal" data-target="#addProductModal">Add Product</button>
+  </div>
+  <!--add product modal-->
+  <div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addProductModalLabel">Add New Product</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="new-product-name" class="col-form-label">name:</label>
+              <input type="text" class="form-control" id="new-product-name">
+              <label for="new-product-qty" class="col-form-label">QTY:</label>
+              <input type="text" class="form-control" id="new-product-qty">
+              <label for="new-product-price" class="col-form-label">price ($):</label>
+              <input type="text" class="form-control" id="new-product-price">
+            </div>
+          </form>
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addProduct()">Add</button>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
